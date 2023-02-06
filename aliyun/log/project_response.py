@@ -11,7 +11,7 @@ from .util import Util
 __all__ = [
     'CreateProjectResponse', 'DeleteProjectResponse',
     'GetProjectResponse', 'ListProjectResponse',
-    'GetProjectTagsResponse',
+    'GetProjectTagsResponse', 'ChangeResourceGroupResponse',
 ]
 
 
@@ -46,6 +46,7 @@ class GetProjectResponse(LogResponse):
         self.owner = resp['owner']
         self.createTime = resp['createTime']
         self.lastModifyTime = resp['lastModifyTime']
+        self.resourceGroupId = resp['resourceGroupId']
 
     def get_owner(self):
         return self.owner
@@ -68,6 +69,9 @@ class GetProjectResponse(LogResponse):
     def get_last_modify_time(self):
         return self.lastModifyTime
 
+    def get_resource_group_id(self):
+        return self.resourceGroupId
+
     def log_print(self):
         print('GetProjectResponse:')
         print('headers:', self.get_all_headers())
@@ -78,6 +82,7 @@ class GetProjectResponse(LogResponse):
         print('status:' + self.get_status())
         print('create_time:' + self.get_create_time())
         print('last_modify_time:' + self.get_last_modify_time())
+        print('resourceGroupId:' + self.get_resource_group_id())
 
 
 class ListProjectResponse(LogResponse):
@@ -133,3 +138,15 @@ class GetProjectTagsResponse(LogResponse):
     @property
     def next_token(self):
         return self._next_token
+
+
+class ChangeResourceGroupResponse(LogResponse):
+    """
+    Response of change_resource_group
+    """
+    def __init__(self, header, resp=''):
+        LogResponse.__init__(self, header, resp)
+
+    def log_print(self):
+        print('ChangeResourceGroupResponse:')
+        print('headers:', self.get_all_headers())
