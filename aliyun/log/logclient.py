@@ -2646,7 +2646,7 @@ class LogClient(object):
         (resp, header) = self._send("GET", None, None, resource, params, headers)
         return ListProjectResponse(resp, header)
 
-    def change_resource_group(self, resource_id, resource_group_id, resource_type="PROJECT"):
+    def change_resource_group(self, resource_id, resource_group_id, resource_type='PROJECT'):
         """ update the resource group of project
         Unsuccessful operation will cause an LogException.
 
@@ -2664,11 +2664,11 @@ class LogClient(object):
         :raise: LogException
         """
         params = {}
-        body = {"resourceId": resource_id, "resourceGroupId": resource_group_id, "resourceType": resource_type}
+        body = {'resourceId': resource_id, 'resourceGroupId': resource_group_id, 'resourceType': resource_type}
         body_str = six.b(json.dumps(body))
         headers = {'Content-Type': 'application/json', 'x-log-bodyrawsize': str(len(body_str))}
-        resource = "/resourcegroup"
-        (resp, header) = self._send("PUT", None, body_str, resource, params, headers)
+        resource = '/resourcegroup'
+        (resp, header) = self._send('PUT', None, body_str, resource, params, headers)
         return ChangeResourceGroupResponse(header, resp)
 
     def es_migration(
